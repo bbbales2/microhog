@@ -1,0 +1,132 @@
+<meta http-equiv="content-type" content="text/html; charset=UTF8">
+<html>
+  <head>
+    <script src="complex_array.js"></script>
+    <script src="fft.js"></script>
+    <script src="numeric-1.2.6.js"></script>
+    <script src="blur.js"></script>
+    <script src="d3.js"></script>
+    <script src="nv.d3.js"></script>
+    <script src="index2d.bundle.js"></script>
+    <script src="micropolar-v0.2.2.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="nv.d3.css"/>
+
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+
+    <script class="hogTemplate" type="text/template">
+      <div style="width:500px;">
+        Images are processed on your computer. They aren't uploaded to me. I'm not stealing them. Not that I'm above that, it's just not happening here.
+        
+        <h4>Options</h4>
+        <table border="1">
+          <tr>
+            <td>Image File:</td>
+            <td class="hidden">Blur</td>
+          </tr>
+          <tr>
+            <td>
+              <div>Upload a .gif, .png, or .jpg microstructure image for analysis. Tiff does not work.</div>
+              <br>
+              <input type="file" class="imageLoader" name="imageLoader" />
+            </td>
+            <td class="hidden">
+              <input type="range" class="blurSlider" min="0.0" max="10.0" step="0.1" value="1.0" />
+              <br>
+              <input class="blurValue" disabled />
+            </td>
+          </tr>
+        </table>
+        <div class="hidden">
+          <h4>Metrics</h4>
+          <table border="1">
+            <tr>
+              <td>e_square</td>
+              <td>e_layer</td>
+              <td>e_circle</td>
+            </tr>
+            <tr>
+              <td><input class="esquare" disabled /></td>
+              <td><input class="elayer" disabled /></td>
+              <td><input class="ecircle" disabled /></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                esquare -> How cubic are the precipitates [0.0 - 1.0] -> Ratio energy in every 4th non-zero frequency bin (oriented same direction as 4th bin) to total energy in every non-zero frequency bin<br><br>
+
+                elayer -> How likely microstructure is layered [0.0 - 1.0] -> Ratio energy in every 2nd non-zero frequency bin (oriented same direction as 2nd bin) to total energy in every non-zero frequency bin<br><br>
+
+                ecircle -> How spherical are the precipitates [0.0+) -> Ratio of energy in zeroth bin to energy in rest of FFT
+              </td>
+            </tr>
+          </table>
+          <br>
+          <br>
+          <table border="1">
+            <tr>
+              <td>
+                Histogram of Oriented Gradients
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="hog" style="width:100%;"></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Histogram of Oriented Gradients plotted on XY-axis (same data as above)
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <svg class="hogxy" style="width:100%;"></svg>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                |FFT|
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <svg class="fft" style="width:100%;"></svg>
+              </td>
+            </tr>
+          </table>
+          <br>
+          <br>
+          <table border="1">
+            <tr>
+              <td>
+                Source image
+              </td>
+              <td>
+                Blurred image
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <canvas class="srcCanvas" style="width:100%;"></canvas>
+              </td>
+              <td>
+                <canvas class="tgtCanvas" style="width:100%;"></canvas>
+              </td>
+            </tr>
+          </table>
+          <input class="showMags" type="checkbox" /> Show gradient magnitudes<br>
+          This plots gradient magnitude instead of the image values.
+        </div>
+      </div>
+
+    </script>
+  </head>
+  <body>
+    <div class="view1">
+    </div>
+  </body>
+</html>
