@@ -1,4 +1,4 @@
-//modified From http://blog.ivank.net/fastest-gaussian-blur.html
+//Taken From http://blog.ivank.net/fastest-gaussian-blur.html
 
 function boxesForGauss(sigma, n)  // standard deviation, number of boxes
 {
